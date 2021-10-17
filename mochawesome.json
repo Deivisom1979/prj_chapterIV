@@ -1,0 +1,145 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-10-17T22:20:25.425Z",
+    "end": "2021-10-17T22:21:49.431Z",
+    "duration": 84006,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "02b2a50b-15f8-4f51-9b53-9a96571bac7d",
+      "title": "",
+      "fullFile": "cypress/integration/challangeIV.spec.js",
+      "file": "cypress/integration/challangeIV.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9840eba0-2581-45d2-988c-e0ed4d716fb8",
+          "title": "Automation Practice - Sign in",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Cenário - Validação de e-mail - Campo vazio",
+              "fullTitle": "Automation Practice - Sign in Cenário - Validação de e-mail - Campo vazio",
+              "timedOut": null,
+              "duration": 15431,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\n1) Acessar o site e clicar no link \"Sign in\"\n2) Validar as ações abaixo:\n    2.1) Clicar no botão \"Create an account\" -> Deveria mostrar mensagem de e-mail inválido\n    2.2) Preencher um e-mail inválido qualquer e clicar no botão -> Deveria mostrar mensagem de e-mail inválido\n*/\n// 2.1\n// Acessar o site e clicar no link \"Sign in\"\ncy.visit('http://automationpractice.com/');\ncy.contains('Sign in').click(); // Clicar no botão \"Create an account\" -> Deveria mostrar mensagem de e-mail inválido\ncy.get('button[name=SubmitCreate]').click();\ncy.contains('Invalid').should('contain.text', 'Invalid email'); // 2.2\n// Acessar o site e clicar no link \"Sign in\"\ncy.visit('http://automationpractice.com/');\ncy.contains('Sign in').click(); // Preencher um e-mail inválido qualquer e clicar no botão -> Deveria mostrar mensagem de e-mail inválido\ncy.get('input[name=email_create]').type('ANY@TEXT');\ncy.get('button[name=SubmitCreate]').click();\ncy.contains('Invalid').should('contain.text', 'Invalid email');",
+              "err": {},
+              "uuid": "8ad83b54-3988-43d8-8291-71a7ad83ae00",
+              "parentUUID": "9840eba0-2581-45d2-988c-e0ed4d716fb8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cenário - Validar campos obrigatórios",
+              "fullTitle": "Automation Practice - Sign in Cenário - Validar campos obrigatórios",
+              "timedOut": null,
+              "duration": 42931,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nCenário - Validar campos obrigatórios\n    1) Acessar o site e clicar no link \"Sign in\"\n    2) Informar um e-mail válido para criar uma conta\n        2.1) Adicionar validações nos campos obrigatórios\n    3) Preencher o formulário com dados válidos aleatórios\n    4) Concluir o cadastro com sucesso\n*/\n// Acessar o site e clicar no link \"Sign in\"\ncy.visit('http://automationpractice.com/index.php?controller=authentication'); // Informar um e-mail válido para criar uma conta\ncy.get('input[name=email_create]').type(chance.email());\ncy.get('button[name=SubmitCreate]').click(); // Adicionar validações nos campos obrigatórios\ncy.get('button#submitAccount').click(); //Validar \"First Name\"\ncy.get('input[name=customer_firstname]').type('{enter}');\ncy.contains('firstname').should('contain.text', 'firstname');\ncy.get('input[name=customer_firstname]').type(chance.first()).type('{enter}');\ncy.contains('firstname').should('not.exist', 'firstname'); //Validar \"Last Name\"\ncy.get('input[name=customer_lastname]').type('{enter}');\ncy.contains('lastname').should('contain.text', 'lastname');\ncy.get('input[name=customer_lastname]').type(chance.last()).type('{enter}');\ncy.contains('lastname').should('not.exist', 'lastname'); //Validar \"Address\"\ncy.get('input[name=address1]').type('{enter}');\ncy.contains('address1').should('contain.text', 'address1');\ncy.get('input[name=address1]').type(chance.address()).type('{enter}');\ncy.contains('address1').should('not.exist', 'address1'); //Validar \"City\"\ncy.get('input[name=city]').type('{enter}');\ncy.contains('city').should('contain.text', 'city');\ncy.get('input[name=city]').type('Miami').type('{enter}');\ncy.contains('city').should('not.exist', 'city'); //Validar \"Zip\"\ncy.get('input[name=postcode]').type('{enter}');\ncy.contains('00000').should('contain.text', '00000');\ncy.get('input[name=postcode]').type(chance.zip()).type('{enter}');\ncy.contains('00000').should('not.exist', '00000'); //Validar \"Phone\"\ncy.get('input[name=phone_mobile]').type('{enter}');\ncy.contains('phone number').should('contain.text', 'phone number');\ncy.get('input[name=phone_mobile]').type(chance.phone()).type('{enter}');\ncy.contains('phone number').should('contain.text', 'phone number'); //Validar \"State\"\ncy.get('select#id_state').select('Florida', {\n  force: true\n}); //Validar \"Password\"\ncy.get('input#passwd').type('{enter}');\ncy.contains('passwd').should('contain.text', 'passwd');\ncy.get('input#passwd').type('DesafioIV@2021').type('{enter}');\ncy.contains('passwd').should('not.exist', 'passwd');\ncy.url().should('contain', 'my-account');",
+              "err": {},
+              "uuid": "74e861b5-b07a-404f-924f-24e70fe70d93",
+              "parentUUID": "9840eba0-2581-45d2-988c-e0ed4d716fb8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cenário - Green Path",
+              "fullTitle": "Automation Practice - Sign in Cenário - Green Path",
+              "timedOut": null,
+              "duration": 21709,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "/*\nCenário Green Path\n    1) Acessar o site e clicar no link \"Sign in\"\n    2) Informar um e-mail válido para criar uma conta\n    3) Preencher o formulário com dados válidos aleatórios\n    4) Concluir o cadastro com sucesso\n*/\n//Acessar o site e clicar no link \"Sign in\"\ncy.visit('http://automationpractice.com/');\ncy.contains('Sign in').click(); //Informar um e-mail válido para criar uma conta\ncy.get('input[name=email_create]').type(chance.email());\ncy.get('button[name=SubmitCreate]').click(); //Preencher o formulário com dados válidos aleatórios\n/* PERSONAL INFORMATION */\ncy.get('input[type=radio]').first().check();\ncy.get('input[name=customer_firstname]').type(chance.first());\ncy.get('input[name=customer_lastname]').type(chance.last());\ncy.get('input#passwd').type('DesafioIV@2021');\ncy.get('select#days').select('6', {\n  force: true\n});\ncy.get('select#months').select(chance.month(), {\n  force: true\n});\ncy.get('select#years').select('2000', {\n  force: true\n});\ncy.get('input#newsletter').check('1');\ncy.get('input#optin').check('1');\n/* ADDRESS INFORMATION */\ncy.get('input[name=company]').type(chance.company());\ncy.get('input[name=address1]').type(chance.address());\ncy.get('input[name=address2]').type('Lorem ipsum');\ncy.get('input[name=city]').type('Miami');\ncy.get('select#id_state').select('Florida', {\n  force: true\n});\ncy.get('input[name=postcode]').type(chance.zip());\ncy.get('textarea[name=other]').type(chance.sentence());\ncy.get('input[name=phone]').type(chance.phone());\ncy.get('input[name=phone_mobile]').type(chance.phone());\ncy.get('input[name=alias]').clear().type('Bootcamp 7');\n/* CONCLUIR O CADASTRO */\ncy.get('button#submitAccount').click();\ncy.url().should('contain', 'my-account');",
+              "err": {},
+              "uuid": "8e55572d-069a-49b7-bc18-3a3e69c5174e",
+              "parentUUID": "9840eba0-2581-45d2-988c-e0ed4d716fb8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8ad83b54-3988-43d8-8291-71a7ad83ae00",
+            "74e861b5-b07a-404f-924f-24e70fe70d93",
+            "8e55572d-069a-49b7-bc18-3a3e69c5174e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 80071,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.3.1"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "mochawesome-report",
+        "quiet": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "5.2.0"
+    }
+  }
+}
